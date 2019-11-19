@@ -1,13 +1,13 @@
-const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'A', 'K', 'Q', 'J'];
-const suits = ['D', 'S', 'C', 'H'];
+const RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'A', 'K', 'Q', 'J'];
+const SUITS = ['D', 'S', 'C', 'H'];
 
 class CardDeck {
   cards = [];
   constructor() {
     let deck = [];
-    for (let s in suits) {
-      for(let r in ranks) {
-        const card = {rank: ranks[r], suit: suits[s]};
+    for (let s in SUITS) {
+      for(let r in RANKS) {
+        const card = {rank: RANKS[r], suit: SUITS[s]};
         deck.push(card);
       }
     }
@@ -21,7 +21,12 @@ class CardDeck {
 
   getCard() {
     const deck = this.cards;
-    return deck[Math.floor(Math.random() * deck.length)];
+    const cardPosition =  Math.floor(Math.random() * deck.length);
+    const card = deck[cardPosition];
+
+    deck.splice(cardPosition, 1);
+    this.cards = deck;
+    return card;
   }
 
   getCards(howMany) {
